@@ -1,5 +1,4 @@
-# Practical Assignment 2
-Please put your name (or names if you work in a group) here:  
+# Practical Assignment 2 
 **Name**: MAKSAT RAMILEV
 ## Problem 2.2
 ### Encapsulate camera and primitives from main application logic (Points 5)
