@@ -28,6 +28,7 @@ public:
 	void Add(const std::shared_ptr<CPrim> pPrim)
 	{
 		// --- PUT YOUR CODE HERE ---
+		m_vpPrims.push_back(pPrim);
 	}
 	/**
 	 * @brief Adds a new light to the scene
@@ -36,17 +37,31 @@ public:
 	void Add(const std::shared_ptr<ILight> pLight)
 	{
 		// --- PUT YOUR CODE HERE ---
+		m_vpLights.push_back(pLight);
 	}
   
 	/**
 	 * @brief Checks intersection of ray \b ray with all contained objects
 	 * @param ray The ray
-	 * @retval true If ray \b ray intersects any object
+	 * @retval true If ray \b ray intersection of any object
 	 * @retval false otherwise
 	 */
 	bool Intersect(Ray& ray) const
 	{
 		// --- PUT YOUR CODE HERE ---
+		bool intersection = false;
+		bool flag = false;
+		for (std::vector<std::shared_ptr<CPrim>>::const_iterator it = m_vpPrims.begin() ; it != m_vpPrims.end(); ++it)
+		{
+			flag = (*it)->Intersect(ray);
+			if (flag){
+				ray.hit = (*it).get();
+				intersection = true;
+			} 
+		}
+		if (intersection){
+				return true;
+		}
 		return false;
 	}
 
@@ -54,9 +69,18 @@ public:
 	 * find occluder
 	 */
 	bool Occluded(Ray& ray)
-	{
-		// --- PUT YOUR CODE HERE ---
+	{	
+		bool flag = false;
+		for (std::vector<std::shared_ptr<CPrim>>::const_iterator it = m_vpPrims.begin() ; it != m_vpPrims.end(); ++it)
+		{
+			flag = (*it)->Intersect(ray);
+			if (flag){
+				return true;
+			} 
+		}
 		return false;
+		// --- PUT YOUR CODE HERE ---
+		
 	}
 
 	/**
@@ -66,7 +90,10 @@ public:
 	Vec3f RayTrace(Ray& ray) const
 	{
 		// --- PUT YOUR CODE HERE ---
-		return Vec3f();
+		if (Intersect(ray)){
+			return ray.hit->getShader()->Shade(ray);
+		}
+		return m_bgColor;
 	}
 
 

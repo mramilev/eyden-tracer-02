@@ -60,7 +60,9 @@ public:
 	virtual Vec3f GetNormal(const Ray& ray) const override
 	{
 		// --- PUT YOUR CODE HERE ---
-		return Vec3f();
+		Vec3f v1 = m_b - m_a;
+		Vec3f v2 = m_c - m_a;
+		return normalize((v1).cross(v2));
 	}
 	
 private:

@@ -3,7 +3,7 @@
 // Simplified (C++11) by Sergey G. Kosov in 2016 for Project X
 #pragma once
 
-#include "types.h"
+#include "sys/types.h"
 #include <random>
 
 namespace DirectGraphicalModels

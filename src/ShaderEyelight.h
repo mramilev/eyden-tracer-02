@@ -22,7 +22,9 @@ public:
 	virtual Vec3f Shade(const Ray& ray) const override
 	{
 		// --- PUT YOUR CODE HERE ---
-		return RGB(0, 0, 0);
+		float theta_angle = ray.hit->GetNormal(ray).dot(-ray.dir);
+        // since we are dealing with float, we need to use fabs instead of abs
+        return fabs(theta_angle) * CShaderFlat::Shade(ray);
 	}
 };
 

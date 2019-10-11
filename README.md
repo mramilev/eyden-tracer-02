@@ -1,5 +1,5 @@
 # Practical Assignment 2 
-**Name**: MAKSAT RAMILEV CS2020
+**Name**: MAKSAT RAMILEV 
 ## Problem 2.2
 ### Encapsulate camera and primitives from main application logic (Points 5)
 1. Fork the current repository
